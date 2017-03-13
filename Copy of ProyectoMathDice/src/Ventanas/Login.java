@@ -149,7 +149,7 @@ public class Login extends JFrame {
 			@Override
 			public void mousePressed(MouseEvent arg0) {
 
-				//Guardar nombre.
+				//Guardar nombre..
 				player1.setNombre(JTextNombre.getText());
 				
 				//Guardar apellidos.
