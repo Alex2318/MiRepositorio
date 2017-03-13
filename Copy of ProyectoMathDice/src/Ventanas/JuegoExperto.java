@@ -32,10 +32,8 @@ import java.awt.event.ActionEvent;
 
 public class JuegoExperto extends JPanel {
 
-	//Definimos variables
+	//DEFINIMOS VARIABLES
 	
-	//ContentPane
-	//private JPanel contentPane;
 	//Player1 de la clase jugador
 	private Jugador player1;
 	//Etiqueta bienvenida creada en el proyecto 05
@@ -83,8 +81,7 @@ public class JuegoExperto extends JPanel {
     //Valor del dado de doce caras, producido por la función Math.random
     private int valor12_1 = (int) (Math.round(Math.random() *(1-12)+12));
     private int valor12_2 = (int) (Math.round(Math.random() *(1-12)+12));
-    //(Math.random() *(mínimo-máximo)+máximo)
-    
+    //(Math.random() *(mínimo-máximo)+máximo)  
 	
 	//Variable objetivo que la incializamos a cero para posteriormente pedirle que sea el resultado del producto de los valores de los dados de doce caras
 	private int objetivo=0;
@@ -99,28 +96,19 @@ public class JuegoExperto extends JPanel {
 	private String operacion="";
 	
 	//Variable int para controlar el número de símbolos que introducimos (no puede haber más de 5)
-	private int nSimbolos=0;
+	private int nSimbolos=0;	
 	
+	//---------------------------------------------------------------------------------------------------
 	
-    //Constructor ventana
+    //CONSTRUCTOR VENTANA
 	public JuegoExperto() {
 		
-		//setFont(new Font("Modern No. 20", Font.PLAIN, 13));
-		//setIconImage(Toolkit.getDefaultToolkit().getImage(JuegoPrincipiante.class.getResource("/Imagenes/dado.png")));
-		//setTitle("MATH DICE");
-		//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1000, 720);
-	
-	
-		//JPanel
-		//contentPane = new JPanel();
-		//contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		//setContentPane(contentPane);
-		//contentPane.
 		setLayout(null);
 		
 		//Etiqueta de bienvenida 
 		LabelBienvenidaExp = new JLabel("New Label");
+		LabelBienvenidaExp.setForeground(new Color(165, 42, 42));
 		LabelBienvenidaExp.setFont(new Font("Modern No. 20", Font.PLAIN, 20));
 		LabelBienvenidaExp.setHorizontalAlignment(SwingConstants.CENTER);
 		LabelBienvenidaExp.setBounds(10, 11, 964, 32);
@@ -352,12 +340,6 @@ public class JuegoExperto extends JPanel {
 				tocaDado=0;
 				operacion="";//Se resetea la operación
 				JTextOperacion.setText(operacion);
-				//LabelDado_3_1.setEnabled(true);
-				//LabelDado_3_2.setEnabled(true);
-				//LabelDado_3_3.setEnabled(true);
-				//LabelDado_6_1.setEnabled(true);
-				//LabelDado_6_2.setEnabled(true);
-				//LabelDado_6_3.setEnabled(true);
 				LabelDado_3_1.addMouseListener(new miBotonDado());
 				LabelDado_3_2.addMouseListener(new miBotonDado());
 				LabelDado_3_3.addMouseListener(new miBotonDado());
@@ -417,6 +399,8 @@ public class JuegoExperto extends JPanel {
 		
 	}
 
+	//-------------------------------------------------------------------------------------------------------
+	
 	//IMPLEMENTACIÓN DE INNER CLASS PARA OPTIMIZAR CÓDIGO
 		private class miBotonDado implements MouseListener {
 
@@ -434,12 +418,18 @@ public class JuegoExperto extends JPanel {
 			@Override
 			public void mousePressed(MouseEvent arg0) {
 				if (tocaDado==0){
+					tocaDado=1;
 					JLabel b=(JLabel)arg0.getSource();
 					JTextOperacion.setText(operacion=operacion+(b.getName()));
 					b.setIcon(dado_gris);
-					tocaDado=1;
-					//b.setEnabled(false);
-					b.removeMouseListener(this);
+					
+				      try{
+							b.removeMouseListener(this);
+
+				        }
+
+				        catch (Exception e) { System.out.println("Error");  }
+			
 				}
 			}	
 		}

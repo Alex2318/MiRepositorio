@@ -32,10 +32,8 @@ import java.awt.event.ActionEvent;
 
 public class JuegoPrincipiante extends JPanel {
 
-	//Definimos variables
+	//DEFINIMOS VARIABLES
 	
-	//ContentPane
-	//private JPanel contentPane;
 	//Player1 de la clase jugador (Le hemos dado el paso a través de la ventana Login con vJuego.setJugador(player1))
 	private Jugador player1;
 	//Etiqueta bienvenida creada en el proyecto 05
@@ -89,7 +87,12 @@ public class JuegoPrincipiante extends JPanel {
 	//Variable int para controlar el número de símbolos que introducimos (no puede haber más de 4)
 	private int nSimbolos=0;
 	
+	//Variable que llevará en todo momento el resultado
+	private int resultado=0;
 	
+	//Variable booleana para saber si el resultado tiene que sumar el siguiente número o restar.
+	private boolean esSuma=true;
+
 	
 	/*
 	 * +ESTAS DOS VARIABLES (resultado y esSuma) SON UNA ALTERNATIVA QUE SE ME HA OCURRIDO POSTERIORMENTE
@@ -101,43 +104,32 @@ public class JuegoPrincipiante extends JPanel {
 	 * +PARA NO SATURAR LA APLICACIÓN EN VEZ DE COMPARAR resultado CON valor12 LE HE DICHO QUE SAQUE
 	 * POR CONSOLA EL resultado Y ASÍ CERCIORARNOS DE LO INTRODUCIDO
 	 */
-	private int resultado=0;
-	private boolean esSuma=true;
-    //Constructor ventana
+
+	//-----------------------------------------------------------------------------------------------------
+	
+    //CONSTRUCTOR PANEL 
 	public JuegoPrincipiante() {
 		
-		//setFont(new Font("Modern No. 20", Font.PLAIN, 13));
-		//setIconImage(Toolkit.getDefaultToolkit().getImage(JuegoPrincipiante.class.getResource("/Imagenes/dado.png")));
-		//setTitle("MATH DICE");
-		//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1000, 720);
-		
-	
-		//JPanel
-		//contentPane = new JPanel();
-		//contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		//setContentPane(contentPane);
-		//contentPane.
+
 		setLayout(null);
 		
 		//Etiqueta de bienvenida 
 		LabelBienvenida = new JLabel("New Label");
+		LabelBienvenida.setForeground(new Color(165, 42, 42));
 		LabelBienvenida.setFont(new Font("Modern No. 20", Font.PLAIN, 20));
 		LabelBienvenida.setHorizontalAlignment(SwingConstants.CENTER);
 		LabelBienvenida.setBounds(10, 11, 964, 32);
-		//contentPane.
 		add(LabelBienvenida);
 		
 		//Etiqueta de dado de 12 caras
 		LabelDado_12 = new JLabel("");
 		LabelDado_12.setBounds(159, 75, 173, 173);
-		//contentPane.
 		add(LabelDado_12);
 		
 		//Etiqueta primer dado 3 caras
 		LabelDado_3_1 = new JLabel("New label");
 		LabelDado_3_1.setBounds(10, 259, 150, 150);
-		//contentPane.
 		add(LabelDado_3_1);
 
 		LabelDado_3_1.addMouseListener(new miBotonDado());
@@ -145,7 +137,6 @@ public class JuegoPrincipiante extends JPanel {
 		//Etiqueta segundo dado 3 caras
 		LabelDado_3_2 = new JLabel("New label");
 		LabelDado_3_2.setBounds(170, 259, 150, 150);
-		//contentPane.
 		add(LabelDado_3_2);
 
 		LabelDado_3_2.addMouseListener(new miBotonDado());
@@ -153,7 +144,6 @@ public class JuegoPrincipiante extends JPanel {
 		//Etiqueta tercer dado 3 caras
 		LabelDado_3_3 = new JLabel("New label");
 		LabelDado_3_3.setBounds(330, 259, 150, 150);
-		//contentPane.
 		add(LabelDado_3_3);
 
 		LabelDado_3_3.addMouseListener(new miBotonDado());
@@ -161,7 +151,6 @@ public class JuegoPrincipiante extends JPanel {
 		//Etiqueta primer dado 6 caras
 		LabelDado_6_1 = new JLabel("New label");
 		LabelDado_6_1.setBounds(90, 420, 150, 150);
-		//contentPane.
 		add(LabelDado_6_1);
 		  
 		LabelDado_6_1.addMouseListener(new miBotonDado());
@@ -170,7 +159,6 @@ public class JuegoPrincipiante extends JPanel {
 		//Etiqueta segundo dado 6 caras
 		LabelDado_6_2 = new JLabel("New label");
 		LabelDado_6_2.setBounds(251, 420, 150, 150);
-		//contentPane.
 		add(LabelDado_6_2);
 
 		LabelDado_6_2.addMouseListener(new miBotonDado());
@@ -181,14 +169,12 @@ public class JuegoPrincipiante extends JPanel {
 		LabelPuntuacion.setHorizontalAlignment(SwingConstants.CENTER);
 		LabelPuntuacion.setFont(new Font("Modern No. 20", Font.PLAIN, 20));
 		LabelPuntuacion.setBounds(535, 471, 410, 40);
-		//contentPane.
 		add(LabelPuntuacion);
 		
 		//Etiqueta símbolo suma
 		LabelSuma = new JLabel("New label");
 		LabelSuma.setIcon(new ImageIcon(JuegoPrincipiante.class.getResource("/Imagenes/suma.png")));
 		LabelSuma.setBounds(535, 54, 150, 150);
-		//contentPane.
 		add(LabelSuma);
 		LabelSuma.addMouseListener(
 				new MouseAdapter(){
@@ -232,7 +218,6 @@ public class JuegoPrincipiante extends JPanel {
 		JTextOperacion.setForeground(Color.BLACK);
 		JTextOperacion.setEditable(false);
 		JTextOperacion.setBounds(534, 215, 411, 57);
-		//contentPane.
 		add(JTextOperacion);
 		JTextOperacion.setColumns(10);
 		JTextOperacion.setText(operacion);
@@ -266,7 +251,6 @@ public class JuegoPrincipiante extends JPanel {
 			});
 		ButtonMathdice.setFont(new Font("Modern No. 20", Font.PLAIN, 20));
 		ButtonMathdice.setBounds(535, 283, 411, 57);
-		//contentPane.
 		add(ButtonMathdice);
 		
 		//Botón para volver a jugar
@@ -283,11 +267,6 @@ public class JuegoPrincipiante extends JPanel {
 				JTextOperacion.setText(operacion);
 				btnReset.setEnabled(false);//Se dejan los botones como al principio
 				ButtonMathdice.setEnabled(true);
-				//LabelDado_3_1.setEnabled(true);
-				//LabelDado_3_2.setEnabled(true);
-				//LabelDado_3_3.setEnabled(true);
-				//LabelDado_6_1.setEnabled(true);
-				//LabelDado_6_2.setEnabled(true);
 				LabelDado_3_1.addMouseListener(new miBotonDado());
 				LabelDado_3_2.addMouseListener(new miBotonDado());
 				LabelDado_3_3.addMouseListener(new miBotonDado());
@@ -301,7 +280,6 @@ public class JuegoPrincipiante extends JPanel {
 		btnReset.setEnabled(false);
 		btnReset.setFont(new Font("Modern No. 20", Font.PLAIN, 20));
 		btnReset.setBounds(535, 351, 411, 57);
-		//contentPane.
 		add(btnReset);
 		
 		//Etiqueta para sacar resultado obtenido
@@ -309,7 +287,6 @@ public class JuegoPrincipiante extends JPanel {
 		LabelResultado.setHorizontalAlignment(SwingConstants.CENTER);
 		LabelResultado.setFont(new Font("Modern No. 20", Font.PLAIN, 22));
 		LabelResultado.setBounds(596, 420, 301, 40);
-		//contentPane.
 		add(LabelResultado);
 		
 		//Instancia de la clase Instrucciones para crear ventana de instrucciones
@@ -318,7 +295,6 @@ public class JuegoPrincipiante extends JPanel {
 		//Etiqueta acceso a ventana instrucciones
 		LabelInterrogante = new JLabel("New label");
 		LabelInterrogante.setBounds(0, 0, 58, 57);
-		//contentPane.
 		add(LabelInterrogante);
 		LabelInterrogante.setIcon(new ImageIcon(JuegoPrincipiante.class.getResource("/Imagenes/interrogante.png")));
 		
@@ -328,7 +304,6 @@ public class JuegoPrincipiante extends JPanel {
 		LabelAciertosSeguidos.setHorizontalAlignment(SwingConstants.CENTER);
 		LabelAciertosSeguidos.setFont(new Font("Modern No. 20", Font.PLAIN, 20));
 		LabelAciertosSeguidos.setBounds(535, 530, 410, 40);
-		//contentPane.
 		add(LabelAciertosSeguidos);
 		
 		//Listener para acceder a la ventana de instrucciones (vIns)
@@ -346,9 +321,13 @@ public class JuegoPrincipiante extends JPanel {
 		//Ejecución del método SacarImagen
 		AsignarImagen();
 	
+		//Ejecución del método para trucar el último dado a impar en el caso que el dado objetivo sea impar y el resto pares.
 		trucarImpar();
 
 	}
+	
+	//--------------------------------------------------------------------------------------------------
+	
 	//IMPLEMENTACIÓN DE INNER CLASS PARA OPTIMIZAR CÓDIGO
 	private class miBotonDado implements MouseListener {
 
@@ -364,26 +343,22 @@ public class JuegoPrincipiante extends JPanel {
 		
 		//MousseListener que vamos a utilizar
 		@Override
-		public void mousePressed(MouseEvent arg0) {
+		public void mousePressed(MouseEvent e) {
 
 			if (tocaDado==0 && esSuma){
-				JLabel b=(JLabel)arg0.getSource();
+				JLabel b=(JLabel)e.getSource();
 				JTextOperacion.setText(operacion=operacion+(b.getName()));
 				resultado=resultado+Integer.parseInt(b.getName());
 				b.setIcon(dado_gris);
+			    b.removeMouseListener(this);
 				tocaDado=1;
-				//b.setEnabled(false);
-				b.removeMouseListener(this);
-				//System.out.println(resultado);
 			}else if (tocaDado==0 && esSuma==false){
-				JLabel b=(JLabel)arg0.getSource();
+				JLabel b=(JLabel)e.getSource();
 				JTextOperacion.setText(operacion=operacion+(b.getName()));
 				resultado=resultado-Integer.parseInt(b.getName());
 				b.setIcon(dado_gris);
+			    b.removeMouseListener(this);
 				tocaDado=1;
-				//b.setEnabled(false);
-				b.removeMouseListener(this);
-				//System.out.println(resultado);
 				}
 		}	
 	}

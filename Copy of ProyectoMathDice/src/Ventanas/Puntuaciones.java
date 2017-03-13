@@ -13,6 +13,7 @@ import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import java.awt.FlowLayout;
+import java.awt.Color;
 
 	/*
 	 VENTANA EN LA QUE POSTERIORMENTE SE PONDRÁ UNA CLASIFICACIÓN DE LAS 10 PRIMERAS PUNTUACIONES EN BASE A LOS 10 USUARIOS
@@ -48,6 +49,7 @@ public class Puntuaciones extends JPanel {
 		setLayout(gbl_contentPane);
 		
 		LabelTitulo = new JLabel("PUNTUACIONES HIST\u00D3RICAS");
+		LabelTitulo.setForeground(new Color(165, 42, 42));
 		LabelTitulo.setFont(new Font("Modern No. 20", Font.PLAIN, 30));
 		GridBagConstraints gbc_LabelTitulo = new GridBagConstraints();
 		gbc_LabelTitulo.gridwidth = 2;

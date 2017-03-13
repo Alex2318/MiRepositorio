@@ -41,8 +41,6 @@ public class Login extends JFrame {
 	private JTextField JTextNombre;
 	private JTextField JTextCampo;
 	private Login referencia;//Creamos referencia sobre Login.
-	//private JuegoPrincipiante vJuego;
-	//private JuegoExperto vExperto;
 	private VentanaPrincipal vPrincipal;
 	private Jugador player1=new Jugador();
 
@@ -53,8 +51,6 @@ public class Login extends JFrame {
 		//Metemos aquí la referencia para que lo que siga lo haga sobre Login.
 		referencia=this;
 		vPrincipal=vP;
-		//vJuego=vJ;
-		//vExperto=vE;
 		
 		//Inicalizamos player1.
 		player1.setNombre("");

@@ -25,7 +25,7 @@ public class VentanaPrincipal extends JFrame {
 	//SE AÑADEN A TRAVÉS DE UN MANAGER CARD LAYOUT
 	private JuegoPrincipiante vPrincipiante=new JuegoPrincipiante();
 	private JuegoExperto vExperto=new JuegoExperto();
-	private Perfil vPerfil=new Perfil();
+	private Perfil2 vPerfil=new Perfil2();
 	private Puntuaciones vPuntuaciones=new Puntuaciones();
 	
 	//IDENTIFICADORES
