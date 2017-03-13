@@ -149,10 +149,10 @@ public class Login extends JFrame {
 			@Override
 			public void mousePressed(MouseEvent arg0) {
 
-				//Guardar nombre..
+				//Guardar nombre...
 				player1.setNombre(JTextNombre.getText());
 				
-				//Guardar apellidos.
+				//Guardar apellidos..
 				player1.setApellidos(JTextApellidos.getText());
 				//Guardar edad.
 				if (player1.isNumeric(JTextEdad.getText())==true)//Si el método creado en la clase jugador nos devuelve un true...
