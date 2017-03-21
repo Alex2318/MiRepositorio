@@ -1,4 +1,4 @@
-package Ventanas;
+package Vista;
 
 import javax.swing.JPanel;
 import java.awt.GridLayout;
@@ -11,7 +11,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JTextField;
 
-import Juego.Jugador;
+import Modelo.Jugador;
 
 import java.awt.Font;
 import javax.swing.DropMode;

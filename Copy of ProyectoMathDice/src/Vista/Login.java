@@ -1,4 +1,4 @@
-package Ventanas;
+package Vista;
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
@@ -6,7 +6,12 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import Juego.Jugador;
+import Modelo.Conexion;
+
+import Modelo.Jugador;
+import Modelo.JugadorDB;
+
+
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import java.awt.Font;
@@ -15,6 +20,7 @@ import javax.swing.JTextField;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.sql.Connection;
 import java.awt.event.ActionEvent;
 import java.awt.Window.Type;
 import java.awt.Color;
@@ -44,6 +50,12 @@ public class Login extends JFrame {
 	private VentanaPrincipal vPrincipal;
 	private Jugador player1=new Jugador();
 
+
+    //Manejadores de la base de datos
+	private Conexion db;
+	private JugadorDB udb;
+	private Connection conexion; //Conexión
+	private boolean connected =false; //Conexión con éxito
 	
 	//Constructor de la ventana Login
 	public Login(VentanaPrincipal vP) {
@@ -56,7 +68,7 @@ public class Login extends JFrame {
 		player1.setNombre("");
 		player1.setApellidos("");
 		player1.setEdad(0);
-		player1.setId(0);
+		
 		
 		//Propiedades de la ventana y del contentPane	
 		setForeground(SystemColor.activeCaption);
@@ -130,6 +142,16 @@ public class Login extends JFrame {
 		BotonPrincipiante.setFont(new Font("Modern No. 20", Font.PLAIN, 15));
 		BotonPrincipiante.setBounds(7, 230, 417, 38);
 		contentPane.add(BotonPrincipiante);	
+		
+		
+		//Creamos nuestro objeto para el manejo de la base de datos
+		db=new Conexion("localhost","jugadores","root","");
+		//Establecemos la conexion
+		connected=db.connectDB();
+		//Asignamos con el getter la conexion establecida
+		conexion=db.getConexion();
+		//Pasamos la conexión a un nuevo objeto UsuariosDB para insertar datos.
+		udb=new JugadorDB(conexion); 
 	}
 	
 	//IMPLEMENTACIÓN DE INNER CLASS PARA OPTIMIZAR CÓDIGO
@@ -160,6 +182,7 @@ public class Login extends JFrame {
 					else//De la otra forma...
 						player1.setEdad(999);//...la edad se rellena como 999 y eso nos valdrá para aclarar futuras comprobaciones.
 				
+
 				//Dependiendo de los campos de texto vamos a mostrar un mensaje de confirmación o error por el JTextCampo.
 				if (player1.getEdad()==999){
 					JTextCampo.setText("Edad erronea. Vuelva a rellenarla y pulse Empieza el juego");
@@ -168,10 +191,14 @@ public class Login extends JFrame {
 				}else if (player1.enBlanco(player1.getApellidos())){
 					JTextCampo.setText("Falta rellenar los apellidos. Rellenelos y pulse Empieza el juego");
 				}else{	
-					JTextCampo.setText("Creado nuevo jugador: "+player1.getNombre()+" "+player1.getApellidos()+" de "+player1.getEdad()+" años.");
+					//REGISTRO DE USUARIO EN BBDD
+					udb.insertarUsuario(JTextNombre.getText(), JTextApellidos.getText(), Integer.valueOf(JTextEdad.getText()));
+					player1.setId(udb.devolverID());
+					JTextCampo.setText("Creado nuevo jugador: "+player1.getNombre()+" "+player1.getApellidos()+" de "+player1.getEdad()+" años.\nConectado con éxito a la BBDD. Registrado con éxito con el número "+player1.getId()+".");
 					vPrincipal.setVisible(true);
-					referencia.dispose();
+					//referencia.dispose();
 					vPrincipal.setJugador(player1);
+					System.out.println("El ID que no han dado es "+player1.getId());
 				}
 					
 			}	

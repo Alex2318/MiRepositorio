@@ -1,10 +1,10 @@
 package Principal;
 
-import Ventanas.Instrucciones;
-import Ventanas.JuegoExperto;
-import Ventanas.JuegoPrincipiante;
-import Ventanas.Login;
-import Ventanas.VentanaPrincipal;
+import Vista.Instrucciones;
+import Vista.JuegoExperto;
+import Vista.JuegoPrincipiante;
+import Vista.Login;
+import Vista.VentanaPrincipal;
 
 public class Principal {
 

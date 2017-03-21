@@ -1,4 +1,4 @@
-package Ventanas;
+package Vista;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
@@ -28,10 +28,6 @@ public class Puntuaciones extends JPanel {
 	LabelUsuario5, LabelUsuario6, LabelUsuario7, LabelUsuario8, LabelUsuario9, LabelUsuario10, LabelPuntuacion1, 
 	LabelPuntuacion2, LabelPuntuacion3, LabelPuntuacion4, LabelPuntuacion5, LabelPuntuacion6, LabelPuntuacion7,
 	LabelPuntuacion8, LabelPuntuacion9, LabelPuntuacion10;
-
-	public static void main(String[] args) {
-		
-	}
 
 
 	public Puntuaciones() {

@@ -1,4 +1,4 @@
-package Ventanas;
+package Vista;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
@@ -9,8 +9,7 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.event.AncestorListener;
 
-
-import Juego.Jugador;
+import Modelo.Jugador;
 
 import javax.swing.JLabel;
 import java.awt.Toolkit;
