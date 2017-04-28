@@ -14,8 +14,6 @@ import Modelo.Jugador;
 import Modelo.JugadorDB;
 
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-
 import java.awt.Toolkit;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -97,9 +95,7 @@ public class JuegoPrincipiante extends JPanel {
 	//Variable booleana para saber si el resultado tiene que sumar el siguiente número o restar.
 	private boolean esSuma=true;
 
-	
-	
-	
+
 	/*
 	 * +ESTAS DOS VARIABLES (resultado y esSuma) SON UNA ALTERNATIVA QUE SE ME HA OCURRIDO POSTERIORMENTE
 	 * A HACERME CON EL SCRIPT PARA TRANSFORMAR EL STRING operacion A UN INTEGER Y COMPARARLO CON EL
@@ -110,13 +106,6 @@ public class JuegoPrincipiante extends JPanel {
 	 * +PARA NO SATURAR LA APLICACIÓN EN VEZ DE COMPARAR resultado CON valor12 LE HE DICHO QUE SAQUE
 	 * POR CONSOLA EL resultado Y ASÍ CERCIORARNOS DE LO INTRODUCIDO
 	 */
-	
-
-    //Manejadores de la base de datos
-	private Conexion db;
-	private JugadorDB jdb;
-	private Connection conexion; //Conexión
-	private boolean connected =false; //Conexión con éxito
 	
 	//-----------------------------------------------------------------------------------------------------
 	
@@ -250,39 +239,11 @@ public class JuegoPrincipiante extends JPanel {
 		//Ejecución del método para trucar el último dado a impar en el caso que el dado objetivo sea impar y el resto pares.
 		trucarImpar();
 
-		
-		/*//Creamos nuestro objeto para el manejo de la base de datos
-		db=new Conexion("localhost","jugadores","root","");
-		//Establecemos la conexion
-		connected=db.connectDB();
-		//Asignamos con el getter la conexion establecida
-		conexion=db.getConexion();
-		//Pasamos la conexión a un nuevo objeto UsuariosDB para insertar datos.
-		jdb2=new JugadorDB(conexion); */
-		
-		
 	}
 	
 	//--------------------------------------------------------------------------------------------------
 	
-	//Conectar con la base de datos
-	private void Conectar(){
-		//Conexión con la BBDD
-		//Creamos nuestro objeto para el manejo de la base de datos
-		try{
-			db=new Conexion("localhost","jugadores","root","");
-			//Establecemos la conexion
-			connected=db.connectDB();
-			//Asignamos con el getter la conexion establecida
-			conexion=db.getConexion();
-			//Pasamos la conexión a un nuevo objeto UsuariosDB para insertar datos.
-			jdb=new JugadorDB(conexion);}
-		catch(Exception e)
-		{
-			JOptionPane.showMessageDialog(null, " Debe haber algún problema con la BBDD o con la conexión.");
-			/*JTextComentarios.setText( " Debe haber algún problema con la BBDD o con la conexión.");	*/
-		}
-	}
+	
 	
 	//IMPLEMENTACIÓN DE INNER CLASS PARA OPTIMIZAR CÓDIGO
 	
@@ -389,13 +350,9 @@ public class JuegoPrincipiante extends JPanel {
 			LabelDado_6_1.removeMouseListener(this);
 			LabelDado_6_2.removeMouseListener(this);
 			if (resultado==valor12){
-				Conectar();
+
 				LabelResultado.setText("Eres una máquina");//Texto de confirmación
 				player1.setPuntos(player1.getPuntos()+2);//Añadimos 5 puntos a los puntos de player1
-				
-				jdb.actualizarJugador(player1);
-			    //System.out.println("El jugador actual tiene "+player1.getPuntos()+" puntos.");
-
 				LabelPuntuacion.setText("Puntuación total: "+player1.getPuntos()+" puntos.");//Sacamos por la etiqueta los puntos que lleva acumulados player1
 				player1.setSeguidos(player1.getSeguidos()+1);
 				if(player1.getSeguidos()>1)
@@ -474,7 +431,6 @@ public class JuegoPrincipiante extends JPanel {
 	
 	//MÉTODO PARA SABER SI HEMOS DADO AL ACTION LISTENER Y DE ESTA FORMA QUE HAGA DE SÉMAFORO A LA HORA DE ACTIVAR LOS MOUSELISTENER
 		private void estaActivo (){
-			
 		if (LabelDado_3_1.isEnabled()){
 			//NO HACE NADA 
 		}else{

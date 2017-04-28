@@ -9,18 +9,13 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.event.AncestorListener;
 
-import Modelo.Conexion;
 import Modelo.Jugador;
-import Modelo.JugadorDB;
 
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-
 import java.awt.Toolkit;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.sql.Connection;
 import java.util.Random;
 import java.awt.Font;
 import javax.swing.SwingConstants;
@@ -101,12 +96,6 @@ public class JuegoExperto extends JPanel {
 	
 	//Variable int para controlar el número de símbolos que introducimos (no puede haber más de 5)
 	private int nSimbolos=0;	
-	
-    //Manejadores de la base de datos
-	private Conexion db;
-	private JugadorDB jdb;
-	private Connection conexion; //Conexión
-	private boolean connected =false; //Conexión con éxito
 	
 	//---------------------------------------------------------------------------------------------------
 	
@@ -291,25 +280,6 @@ public class JuegoExperto extends JPanel {
 
 	//-------------------------------------------------------------------------------------------------------
 	
-	//Conectar con la base de datos
-		private void Conectar(){
-			//Conexión con la BBDD
-			//Creamos nuestro objeto para el manejo de la base de datos
-			try{
-				db=new Conexion("localhost","jugadores","root","");
-				//Establecemos la conexion
-				connected=db.connectDB();
-				//Asignamos con el getter la conexion establecida
-				conexion=db.getConexion();
-				//Pasamos la conexión a un nuevo objeto UsuariosDB para insertar datos.
-				jdb=new JugadorDB(conexion);}
-			catch(Exception e)
-			{
-				JOptionPane.showMessageDialog(null, " Debe haber algún problema con la BBDD o con la conexión.");
-				/*JTextComentarios.setText( " Debe haber algún problema con la BBDD o con la conexión.");	*/
-			}
-		}
-		
 	//IMPLEMENTACIÓN DE INNER CLASS PARA OPTIMIZAR CÓDIGO
 	
 		//ETIQUETAS DE DADO
@@ -529,11 +499,8 @@ public class JuegoExperto extends JPanel {
 					    try {
 							int i = ((Integer) (engine.eval(operacion))).intValue();//El objeto generado por las clases importadas lo pasamos a un int
 							if (i==objetivo){
-								Conectar();
-								
 								LabelResultado.setText("Eres una máquina");//Texto de confirmación
 								player1.setPuntos(player1.getPuntos()+5);//Añadimos 5 puntos a los puntos de player1
-								jdb.actualizarJugador(player1);
 								LabelPuntuacion.setText("Puntuación total: "+player1.getPuntos()+" puntos.");//Sacamos por la etiqueta los puntos que lleva acumulados player1
 								ButtonMathdice.setEnabled(false);//Deshabilitamos botón mathdice
 								btnReset.setEnabled(true);//Habilitamos botón reset

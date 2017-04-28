@@ -6,8 +6,6 @@ import javax.swing.JTextArea;
 import java.awt.GridLayout;
 import java.awt.GridBagLayout;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 
@@ -15,9 +13,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JTextField;
 
-import Modelo.Conexion;
 import Modelo.Jugador;
-import Modelo.JugadorDB;
 
 import java.awt.Font;
 import javax.swing.DropMode;
@@ -25,7 +21,6 @@ import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.sql.Connection;
 import java.awt.event.ActionEvent;
 
 public class Perfil2 extends JPanel {
@@ -45,13 +40,9 @@ public class Perfil2 extends JPanel {
 	
 	private JButton BotonGuardar;
 	private Jugador player1;
-
-    //Manejadores de la base de datos
-	private Conexion db;
-	private JugadorDB jdb;
-	private Connection conexion; //Conexión
-	private boolean connected =false; //Conexión con éxito
-	
+	/**
+	 * Create the panel.
+	 */
 	public Perfil2() {
 		
 		setBounds(100, 100, 1000, 720);
@@ -196,24 +187,6 @@ public class Perfil2 extends JPanel {
 		
 
 	}
-	//Conectar con la base de datos
-	private void Conectar(){
-		//Conexión con la BBDD
-		//Creamos nuestro objeto para el manejo de la base de datos
-		try{
-			db=new Conexion("localhost","jugadores","root","");
-			//Establecemos la conexion
-			connected=db.connectDB();
-			//Asignamos con el getter la conexion establecida
-			conexion=db.getConexion();
-			//Pasamos la conexión a un nuevo objeto UsuariosDB para insertar datos.
-			jdb=new JugadorDB(conexion);}
-		catch(Exception e)
-		{
-			JOptionPane.showMessageDialog(null, " Debe haber algún problema con la BBDD o con la conexión.");
-		}
-	}
-	
 	
 	//INNER CLASS PARA EL BOTÓN GUARDAR CAMBIOS
 	private class miBotonGuardar implements MouseListener {
@@ -229,13 +202,11 @@ public class Perfil2 extends JPanel {
 		//MousseListener que vamos a utilizar
 		@Override
 		public void mousePressed(MouseEvent e) {
-			Conectar();
 			player1.setNombre(CajaNombre.getText());
 			player1.setApellidos(CajaApellidos.getText());
 			player1.setEdad(Integer.parseInt(CajaEdad.getText()));
 			CajaComentarios.setText("Cambios guardados con éxito para el jugador "+player1.getNombre()+" "+player1.getApellidos()+" de "+player1.getEdad()+" años.");
-			jdb.actualizarJugador(player1);
-		} 
+			} 
 		}	
 	
 	

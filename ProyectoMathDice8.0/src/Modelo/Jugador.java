@@ -106,7 +106,5 @@ public class Jugador {
 	
 	}
 
-	public String toString(){
-		return this.id+" "+this.nombre+" "+this.apellidos+" "+this.puntos+" "+this.edad;
-	}
+	
 }
