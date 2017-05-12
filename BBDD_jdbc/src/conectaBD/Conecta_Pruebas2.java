@@ -1,7 +1,7 @@
 package conectaBD;
 import java.sql.*;
 
-public class Conecta_Pruebas {
+public class Conecta_Pruebas2 {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
@@ -10,7 +10,7 @@ public class Conecta_Pruebas {
 	
 			//1.CREAR CONEXIÓN.
 			
-			Connection miConexion=DriverManager.getConnection("jdbc:mysql://54.191.152.117:3306/pruebas", "almobe", "redlight2318");
+			Connection miConexion=DriverManager.getConnection("jdbc:mysql://mydatabase2.cvgc0pgtcc5v.us-west-2.rds.amazonaws.com:3306/pruebas", "almobe", "redlight2318");
 			
 			System.out.println("Conectado con éxito");
 			

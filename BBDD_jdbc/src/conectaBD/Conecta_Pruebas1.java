@@ -1,7 +1,7 @@
 package conectaBD;
 import java.sql.*;
 
-public class Conecta_Pruebas {
+public class Conecta_Pruebas1 {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
