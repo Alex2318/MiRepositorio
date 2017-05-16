@@ -71,7 +71,7 @@ public class Caja_Conexion extends JFrame {
 		contentPane.add(JTextPassword);
 		JTextPassword.setColumns(10);
 		
-		JButton btnNewButton = new JButton("New button");
+		JButton btnNewButton = new JButton("Logueate");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				Conexion con=new Conexion(JTextUser.getText(), JTextPassword.getText());
