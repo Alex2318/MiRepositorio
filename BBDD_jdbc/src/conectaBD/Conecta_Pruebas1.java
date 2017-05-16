@@ -10,7 +10,8 @@ public class Conecta_Pruebas1 {
 	
 			//1.CREAR CONEXIÓN.
 			
-			Connection miConexion=DriverManager.getConnection("jdbc:mysql://54.191.152.117:3306/pruebas", "user", "password1");
+			Connection miConexion=DriverManager.getConnection("jdbc:mysql://54.149.76.139:3306/pruebas", "paco", "paco"
+					+ "");
 			
 			System.out.println("Conectado con éxito");
 			
