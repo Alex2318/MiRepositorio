@@ -97,6 +97,7 @@ public class VentanaPrincipal extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 			    CardLayout cl = (CardLayout)(contentPane.getLayout());
 			    cl.show(contentPane,VENTANAPUNTUACIONES);
+			    
 			}
 		});
 		

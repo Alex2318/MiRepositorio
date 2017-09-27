@@ -376,7 +376,10 @@ public class JuegoPrincipiante extends JPanel {
 			LabelDado_3_3.removeMouseListener(this);
 			LabelDado_6_1.removeMouseListener(this);
 			LabelDado_6_2.removeMouseListener(this);
+			ButtonMathdice.removeMouseListener(this);
 			if (resultado==valor12){
+				ButtonMathdice.setEnabled(false);//Deshabilitamos botón mathdice
+				btnReset.setEnabled(true);//Habilitamos botón reset
 				Conectar();
 				LabelResultado.setText("Eres una máquina");//Texto de confirmación
 				player1.setPuntos(player1.getPuntos()+2);//Añadimos 5 puntos a los puntos de player1
@@ -393,8 +396,7 @@ public class JuegoPrincipiante extends JPanel {
 					LabelAciertosSeguidos.setText("Enhorabuena has batido tu record de aciertos seguidos con "+player1.getSeguidos()+" aciertos.");
 				}else if(player1.getSeguidos()>1){
 				LabelAciertosSeguidos.setText("Enhorabuena, llevas "+player1.getSeguidos()+" aciertos seguidos.");
-				ButtonMathdice.setEnabled(false);//Deshabilitamos botón mathdice
-				btnReset.setEnabled(true);//Habilitamos botón reset
+
 				System.out.println(player1.getPuntos());
 				}
 			}else{
@@ -422,7 +424,7 @@ public class JuegoPrincipiante extends JPanel {
 		//MousseListener que vamos a utilizar
 		@Override
 		public void mousePressed(MouseEvent e) {
-			
+			btnReset.removeMouseListener(this);
 			//Reseteamos todos los valores que intervienen en la ventana como al inicio
 			valor12 = (int) (Math.round(Math.random() *(1-12)+12));//Vuelve a generar un valor para el dado12
 			AsignarValor();//Se generan valores para los dados de tres y seis caras

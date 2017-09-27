@@ -497,6 +497,8 @@ public class JuegoExperto extends JPanel {
 				estaActivo();
 				btnReset.setEnabled(false);//Se dejan los botones como al principio
 				ButtonMathdice.setEnabled(true);
+				ButtonMathdice.addMouseListener(new botonMathDice());
+
 				LabelResultado.setText("");
 			}	
 		}
@@ -519,8 +521,11 @@ public class JuegoExperto extends JPanel {
 			    ScriptEngineManager mgr = new ScriptEngineManager();
 			    ScriptEngine engine = mgr.getEngineByName("JavaScript");
 			    try {
+			    	ButtonMathdice.removeMouseListener(this);
+
 			    	int i = ((Integer) (engine.eval(operacion))).intValue();//El objeto generado por las clases importadas lo pasamos a un int
 			    	if (i==objetivo){
+
 						Conectar();
 						LabelResultado.setText("Eres una máquina");//Texto de confirmación
 						player1.setPuntos(player1.getPuntos()+5);//Añadimos 5 puntos a los puntos de player1
